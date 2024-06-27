@@ -40,7 +40,7 @@ export default function Account() {
                 <p>Phone: {user.phone}</p>
               </div>
               <div className="card-actions justify-end mt-2">
-                <button className="btn btn-primary">Edit Account</button>
+                <Link to={"edit"} className="btn btn-primary">Edit Account</Link>
                 <button className="btn btn-error">Delete Account</button>
               </div>
             </div>

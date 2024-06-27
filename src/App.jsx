@@ -29,6 +29,7 @@ import ShowAddress from "./pages/address/ShowAddress";
 import EditAddress from "./pages/address/EditAddress";
 import Register from "./pages/auth/Register";
 import { rupiah } from "./utils";
+import EditAccount from "./pages/EditAccount";
 
 export default function App() {
   return (
@@ -119,6 +120,14 @@ export default function App() {
           element={
             <Layout>
               <Account />
+            </Layout>
+          }
+        />
+        <Route
+          path="/account/edit"
+          element={
+            <Layout>
+              <EditAccount />
             </Layout>
           }
         />
