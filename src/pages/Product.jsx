@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import getProduct from '../api/getProduct'
+import getProduct from '../api/product/getProduct'
 import { CartContext } from '../context/CartContext'
 import TextHeader from '../components/TextHeader'
 import { rupiah } from '../utils'

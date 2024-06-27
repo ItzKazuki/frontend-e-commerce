@@ -6,13 +6,12 @@ import {
   useLocation,
   useNavigate,
 } from 'react-router-dom'
-import { Home, MyOrders, Account } from './pages'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faReceipt, faUser } from '@fortawesome/free-solid-svg-icons'
 import NotFound from './pages/error/NotFound'
 import Login from './pages/auth/Login'
 import { cookie } from './api/http'
-import Order from './pages/Order'
+import Order from './pages/order/Order'
 import Product from './pages/Product'
 import { postLogout } from './api/auth'
 import Cart from './pages/Cart'
@@ -25,7 +24,10 @@ import ShowAddress from './pages/address/ShowAddress'
 import EditAddress from './pages/address/EditAddress'
 import Register from './pages/auth/Register'
 import { rupiah } from './utils'
-import EditAccount from './pages/EditAccount'
+import EditAccount from './pages/account/EditAccount'
+import Home from './pages/Home'
+import MyOrders from './pages/order/MyOrders'
+import Account from './pages/account/Account'
 
 export default function App() {
   return (
@@ -281,6 +283,15 @@ function Navbar({ user }) {
           >
             {user ? (
               <>
+                {user.role != 'customer' ? (
+                  <li>
+                    <Link to="http://local.kazukikun.space:8000/auth/login">
+                      Dashboard
+                    </Link>
+                  </li>
+                ) : (
+                  ''
+                )}
                 <li>
                   <Link to="/account">Profile</Link>
                 </li>

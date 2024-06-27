@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { cookie } from '../../api/http'
 import { postLogin } from '../../api/auth'
-import getAccount from '../../api/getAccount'
+import getAccount from '../../api/account/getAccount';
 import { Link, useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {

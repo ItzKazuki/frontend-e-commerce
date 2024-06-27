@@ -1,16 +1,19 @@
-import http, { cookie } from './http'
+import http, { cookie } from '../http'
 
 http.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${cookie.get('auth_token')}`
   return config
 })
 
-export default (data) => {
+export default () => {
   return new Promise((resolve, reject) => {
     http
-      .put(`/user`, JSON.stringify(data))
+      .get(`/orders`)
       .then(({ data }) => {
-        resolve(data)
+        resolve({
+          items: data.orders,
+          page: data.page,
+        })
       })
       .catch(reject)
   })

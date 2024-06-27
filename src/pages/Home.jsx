@@ -1,4 +1,4 @@
-import getProducts from '../api/getProducts'
+import getProducts from '../api/product/getProducts'
 import Product from '../components/Product'
 import { Each } from '../components/Each'
 import { useState, useEffect } from 'react'

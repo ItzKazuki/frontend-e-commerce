@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import getOrder from '../api/getOrder'
-import { Each } from '../components/Each'
-import Product from '../components/Product'
-import TextHeader from '../components/TextHeader'
-import { createAddressDetail, rupiah } from '../utils'
-import Loading from '../components/Loading'
-import NotFound from './error/NotFound'
-import Card from '../components/Card'
+import getOrder from '../../api/order/getOrder'
+import { Each } from '../../components/Each'
+import Product from '../../components/Product'
+import TextHeader from '../../components/TextHeader'
+import { createAddressDetail, rupiah } from '../../utils'
+import Loading from '../../components/Loading'
+import NotFound from '../error/NotFound'
+import Card from '../../components/Card'
 
 export default function Order() {
   const { id } = useParams()

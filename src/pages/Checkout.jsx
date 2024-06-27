@@ -4,7 +4,7 @@ import { CartContext } from '../context/CartContext'
 import { createAddressDetail, rupiah } from '../utils'
 import { Each } from '../components/Each'
 import { useNavigate } from 'react-router-dom'
-import createOrder from '../api/createOrder'
+import createOrder from '../api/order/createOrder'
 import PaymentChannel from '../components/PaymentChannel'
 
 export default function Checkout() {
