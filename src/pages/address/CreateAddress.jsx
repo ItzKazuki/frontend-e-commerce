@@ -1,45 +1,45 @@
-import { useState } from "react";
-import TextHeader from "../../components/TextHeader";
-import createAddress from "../../api/address/createAddress";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react'
+import TextHeader from '../../components/TextHeader'
+import createAddress from '../../api/address/createAddress'
+import { useNavigate } from 'react-router-dom'
 
 export default function CreateAddress() {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
   const [address, setAddress] = useState({
-    address_title: "",
-    address_name: "",
-    address_line1: "",
-    address_line2: "",
-    city: "",
-    state: "",
-    postal_code: "",
-    country: "",
-  });
+    address_title: '',
+    address_name: '',
+    address_line1: '',
+    address_line2: '',
+    city: '',
+    state: '',
+    postal_code: '',
+    country: '',
+  })
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target
     setAddress((prevAddress) => ({
       ...prevAddress,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    setLoading(true);
+    event.preventDefault()
+    setLoading(true)
     // Handle form submission logic here
     createAddress(address)
       .then((res) => {
-        setLoading(false);
-        localStorage.setItem("user", JSON.stringify(res.user));
-        navigate("/account/address");
+        setLoading(false)
+        localStorage.setItem('user', JSON.stringify(res.user))
+        navigate('/account/address')
       })
       .catch((err) => {
-        console.error(err);
-        setLoading(false);
-      });
-  };
+        console.error(err)
+        setLoading(false)
+      })
+  }
 
   return (
     <div className="flex flex-col justify-center items-center gap-4">
@@ -161,7 +161,7 @@ export default function CreateAddress() {
                 {loading ? (
                   <span className="loading loading-spinner loading-md"></span>
                 ) : (
-                  "Create Address"
+                  'Create Address'
                 )}
               </button>
             </div>
@@ -169,5 +169,5 @@ export default function CreateAddress() {
         </div>
       </div>
     </div>
-  );
+  )
 }

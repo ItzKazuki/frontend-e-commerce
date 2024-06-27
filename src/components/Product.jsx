@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { rupiah } from "../utils";
+import { Link } from 'react-router-dom'
+import { rupiah } from '../utils'
 
 export default function Product({ productDetail }) {
   return (
@@ -20,5 +20,5 @@ export default function Product({ productDetail }) {
         </div>
       </div>
     </Link>
-  );
+  )
 }

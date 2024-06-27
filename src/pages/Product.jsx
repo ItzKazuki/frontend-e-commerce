@@ -1,62 +1,62 @@
-import { useEffect, useState, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import getProduct from "../api/getProduct";
-import { CartContext } from "../context/CartContext";
-import TextHeader from "../components/TextHeader";
-import { rupiah } from "../utils";
-import Loading from "../components/Loading";
+import { useEffect, useState, useContext } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import getProduct from '../api/getProduct'
+import { CartContext } from '../context/CartContext'
+import TextHeader from '../components/TextHeader'
+import { rupiah } from '../utils'
+import Loading from '../components/Loading'
 
 export default function Product() {
-  const { id } = useParams();
-  const [product, setProduct] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const { id } = useParams()
+  const [product, setProduct] = useState({})
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const navigate = useNavigate()
 
-  const upload = product?.upload ? product.upload : {};
+  const upload = product?.upload ? product.upload : {}
 
   const { addToCart, addToCheckout, removeAllItemFromCheckout } =
-    useContext(CartContext);
+    useContext(CartContext)
 
   const cartItem = {
     id: product.id,
     name: product.product_name,
     price: product.price,
     image: upload.image,
-  };
+  }
 
   const handleAddToCart = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    return addToCart(cartItem);
-  };
+    return addToCart(cartItem)
+  }
 
   const handleBuyNow = (e) => {
-    e.preventDefault();
-    removeAllItemFromCheckout();
+    e.preventDefault()
+    removeAllItemFromCheckout()
 
-    addToCheckout({ ...cartItem, quantity: 1 });
-    return navigate("/checkout");
-  };
+    addToCheckout({ ...cartItem, quantity: 1 })
+    return navigate('/checkout')
+  }
 
   useEffect(() => {
     getProduct(id)
       .then((data) => {
-        setProduct(data.product);
-        setLoading(false);
+        setProduct(data.product)
+        setLoading(false)
       })
       .catch((error) => {
-        setError(error);
-        setLoading(false);
-      });
-  }, [id]);
+        setError(error)
+        setLoading(false)
+      })
+  }, [id])
 
   if (loading) {
-    return <Loading />;
+    return <Loading />
   }
 
   if (error) {
-    return <p>Error: {error.message}</p>;
+    return <p>Error: {error.message}</p>
   }
 
   return (
@@ -87,5 +87,5 @@ export default function Product() {
         </div>
       </div>
     </div>
-  );
+  )
 }

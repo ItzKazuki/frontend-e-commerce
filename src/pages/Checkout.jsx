@@ -1,46 +1,46 @@
-import { useContext, useState } from "react";
-import TextHeader from "../components/TextHeader";
-import { CartContext } from "../context/CartContext";
-import { createAddressDetail, rupiah } from "../utils";
-import { Each } from "../components/Each";
-import { useNavigate } from "react-router-dom";
-import createOrder from "../api/createOrder";
-import PaymentChannel from "../components/PaymentChannel";
+import { useContext, useState } from 'react'
+import TextHeader from '../components/TextHeader'
+import { CartContext } from '../context/CartContext'
+import { createAddressDetail, rupiah } from '../utils'
+import { Each } from '../components/Each'
+import { useNavigate } from 'react-router-dom'
+import createOrder from '../api/createOrder'
+import PaymentChannel from '../components/PaymentChannel'
 
 export default function Checkout() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const navigate = useNavigate();
-  const { checkout, getTotalPriceCheckout } = useContext(CartContext);
-  const [loading, setLoading] = useState(false);
-  const [payment, setPayment] = useState("qris");
-  const handleChangePayment = (e) => setPayment(e.target.value);
-  const shippingCost = 10000;
-  const subtotal = getTotalPriceCheckout();
-  const total = subtotal + shippingCost;
+  const user = JSON.parse(localStorage.getItem('user'))
+  const navigate = useNavigate()
+  const { checkout, getTotalPriceCheckout } = useContext(CartContext)
+  const [loading, setLoading] = useState(false)
+  const [payment, setPayment] = useState('qris')
+  const handleChangePayment = (e) => setPayment(e.target.value)
+  const shippingCost = 10000
+  const subtotal = getTotalPriceCheckout()
+  const total = subtotal + shippingCost
   let order = {
     products: JSON.stringify(checkout),
     payment_method: payment,
-  };
+  }
 
-  const address = user.addresses.find((address) => address.is_primary);
+  const address = user.addresses.find((address) => address.is_primary)
 
-  if (!address) return (window.location.href = "/account");
+  if (!address) return (window.location.href = '/account')
 
   const handleClick = () => {
-    setLoading(true);
+    setLoading(true)
     createOrder(order)
       .then((res) => {
         // if(payment == 'qris') return window.location.href = res.redirect_url;
-        if (payment == "gopay")
-          return (window.location.href = res.url.gopay_app);
+        if (payment == 'gopay')
+          return (window.location.href = res.url.gopay_app)
         // if(payment == 'cod') return window.location.href = res.redirect_url;
-        return (window.location.href = res.url.redirect_url);
+        return (window.location.href = res.url.redirect_url)
       })
       .catch((err) => {
-        setLoading(false);
-        console.error(err);
-      });
-  };
+        setLoading(false)
+        console.error(err)
+      })
+  }
 
   return (
     <div>
@@ -78,7 +78,7 @@ export default function Checkout() {
             </div>
           </div>
           <div className="mt-4">
-            <TextHeader className={"mb-4"}>Payment Method</TextHeader>
+            <TextHeader className={'mb-4'}>Payment Method</TextHeader>
             <div className="flex flex-col gap-2 items-center justify-center w-full">
               <PaymentChannel
                 onChange={handleChangePayment}
@@ -94,16 +94,16 @@ export default function Checkout() {
               {loading ? (
                 <span className="loading loading-spinner loading-md"></span>
               ) : (
-                "Pay Now"
+                'Pay Now'
               )}
             </button>
           </div>
         </>
       ) : (
-        navigate("/")
+        navigate('/')
       )}
     </div>
-  );
+  )
 }
 
 function ProductCart({ productData }) {
@@ -115,5 +115,5 @@ function ProductCart({ productData }) {
       </div>
       <p>quantity: {productData.quantity}</p>
     </div>
-  );
+  )
 }

@@ -1,11 +1,11 @@
-import { useEffect, useContext } from "react";
-import { Each } from "../components/Each";
-import { CartContext } from "../context/CartContext";
-import TextHeader from "../components/TextHeader";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { rupiah } from "../utils";
-import { Link } from "react-router-dom";
+import { useEffect, useContext } from 'react'
+import { Each } from '../components/Each'
+import { CartContext } from '../context/CartContext'
+import TextHeader from '../components/TextHeader'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { rupiah } from '../utils'
+import { Link } from 'react-router-dom'
 
 export default function Cart() {
   const {
@@ -18,30 +18,30 @@ export default function Cart() {
     removeItemFromCheckout,
     increaseQuantityCheckout,
     decreaseQuantityCheckout,
-  } = useContext(CartContext);
+  } = useContext(CartContext)
 
   const handleIncrease = (e) => {
-    const productId = e.target.value;
-    increaseQuantity(productId);
-    if (checkout) increaseQuantityCheckout(productId);
-  };
+    const productId = e.target.value
+    increaseQuantity(productId)
+    if (checkout) increaseQuantityCheckout(productId)
+  }
 
   const handleDecrease = (e) => {
-    const productId = e.target.value;
-    decreaseQuantity(productId);
-    if (checkout) decreaseQuantityCheckout(productId);
-  };
+    const productId = e.target.value
+    decreaseQuantity(productId)
+    if (checkout) decreaseQuantityCheckout(productId)
+  }
 
   // make checkout localstorage
   const handleChangeCheckbox = (e) => {
-    const productId = e.target.value;
+    const productId = e.target.value
     if (e.target.checked) {
-      const product = cart.filter((item) => item.id == productId);
-      addToCheckout(...product);
+      const product = cart.filter((item) => item.id == productId)
+      addToCheckout(...product)
     } else {
-      removeItemFromCheckout(productId);
+      removeItemFromCheckout(productId)
     }
-  };
+  }
 
   return (
     <div className="">
@@ -66,8 +66,10 @@ export default function Cart() {
         <div className="flex flex-col items-center justify-center min-h-screen">
           {/* <span className="loading loading-spinner loading-lg"></span> */}
           <h1 className="text-3xl font-bold text-red-700">Error</h1>
-          <h1 className="text-2xl font-bold">Your Cart don&apos;t have any items</h1>
-          <Link to={"/"} className="btn btn-primary mt-4 text-lg">
+          <h1 className="text-2xl font-bold">
+            Your Cart don&apos;t have any items
+          </h1>
+          <Link to={'/'} className="btn btn-primary mt-4 text-lg">
             Buy Something Here
           </Link>
         </div>
@@ -79,9 +81,9 @@ export default function Cart() {
               Subtotal: {rupiah(getTotalPriceCheckout())}
             </span>
             <Link
-              to={"/checkout"}
+              to={'/checkout'}
               className={`btn btn-primary ${
-                checkout.length != 0 ? "" : "btn-disabled text-black"
+                checkout.length != 0 ? '' : 'btn-disabled text-black'
               }`}
             >
               Checkout <FontAwesomeIcon icon={faCartShopping} />
@@ -90,21 +92,21 @@ export default function Cart() {
         </div>
       )}
     </div>
-  );
+  )
 }
 
 function CartItem({ productData, onChange, handleIncrease, handleDecrease }) {
-  const { checkout } = useContext(CartContext);
+  const { checkout } = useContext(CartContext)
 
   // Update checkbox state when checkout changes
   useEffect(() => {
-    const isChecked = checkout.some((item) => item.id === productData.id);
+    const isChecked = checkout.some((item) => item.id === productData.id)
     // Update the checkbox's checked state
-    const checkboxElement = document.getElementById(`ajdjak-${productData.id}`);
+    const checkboxElement = document.getElementById(`ajdjak-${productData.id}`)
     if (checkboxElement) {
-      checkboxElement.checked = isChecked;
+      checkboxElement.checked = isChecked
     }
-  }, [checkout, productData.id]); // Re-run when checkout changes
+  }, [checkout, productData.id]) // Re-run when checkout changes
 
   return (
     <div className="w-full bg-gray-300 rounded-lg p-4 flex items-center space-x-4 mx-4">
@@ -140,5 +142,5 @@ function CartItem({ productData, onChange, handleIncrease, handleDecrease }) {
         </button>
       </div>
     </div>
-  );
+  )
 }

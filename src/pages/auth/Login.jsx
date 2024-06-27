@@ -1,38 +1,38 @@
-import { useState } from "react";
-import { cookie } from "../../api/http";
-import { postLogin } from "../../api/auth";
-import getAccount from "../../api/getAccount";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from 'react'
+import { cookie } from '../../api/http'
+import { postLogin } from '../../api/auth'
+import getAccount from '../../api/getAccount'
+import { Link, useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [userLogin, setUserLogin] = useState({});
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+  const [userLogin, setUserLogin] = useState({})
+  const navigate = useNavigate()
 
   const handleChange = (e) =>
     setUserLogin({
       ...userLogin,
       [e.target.name]: e.target.value,
-    });
+    })
 
   const handleClick = (e) => {
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault()
+    setLoading(true)
     postLogin(userLogin)
       .then((res) => {
-        cookie.set("auth_token", res.token, { path: "/" });
+        cookie.set('auth_token', res.token, { path: '/' })
         getAccount().then((res) => {
-          localStorage.setItem("user", JSON.stringify(res.data));
-          return navigate("/");
-        });
+          localStorage.setItem('user', JSON.stringify(res.data))
+          return navigate('/')
+        })
       })
       .catch((err) => {
-        setError(err.message);
-        console.error(err);
-        setLoading(false);
-      });
-  };
+        setError(err.message)
+        console.error(err)
+        setLoading(false)
+      })
+  }
 
   return (
     <div className="py-24 px-10">
@@ -42,12 +42,12 @@ const LoginForm = () => {
         {/* Email Input */}
         <div className={`form-control w-full mt-4`}>
           <label className="label">
-            <span className={"label-text text-base-content "}>Email</span>
+            <span className={'label-text text-base-content '}>Email</span>
           </label>
           <input
             name="email"
-            type={"email"}
-            placeholder={""}
+            type={'email'}
+            placeholder={''}
             className="input input-bordered w-full"
             onChange={handleChange}
             required
@@ -57,12 +57,12 @@ const LoginForm = () => {
         {/* Password Input */}
         <div className={`form-control w-full mt-4`}>
           <label className="label">
-            <span className={"label-text text-base-content "}>Password</span>
+            <span className={'label-text text-base-content '}>Password</span>
           </label>
           <input
             name="password"
-            type={"password"}
-            placeholder={""}
+            type={'password'}
+            placeholder={''}
             className="input input-bordered w-full"
             onChange={handleChange}
             required
@@ -84,7 +84,7 @@ const LoginForm = () => {
             Email or Password error, try again
           </p>
         ) : (
-          ""
+          ''
         )}
 
         {/* Login Button */}
@@ -92,13 +92,13 @@ const LoginForm = () => {
           {loading ? (
             <span className="loading loading-spinner loading-md"></span>
           ) : (
-            "Login"
+            'Login'
           )}
         </button>
 
         {/* Register Link */}
         <div className="text-center mt-4">
-          Dont have an account yet?{" "}
+          Dont have an account yet?{' '}
           <Link to="/register">
             <span className="inline-block hover:text-primary hover:underline hover:cursor-pointer transition duration-200">
               Register
@@ -107,8 +107,8 @@ const LoginForm = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
 const Login = () => {
   return (
@@ -119,7 +119,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

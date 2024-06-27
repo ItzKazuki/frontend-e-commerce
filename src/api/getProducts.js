@@ -1,4 +1,4 @@
-import http from "./http";
+import http from './http'
 
 export default () => {
   return new Promise((resolve, reject) => {
@@ -8,8 +8,8 @@ export default () => {
         resolve({
           items: data.products,
           page: data.page,
-        });
+        })
       })
-      .catch(reject);
-  });
-};
+      .catch(reject)
+  })
+}

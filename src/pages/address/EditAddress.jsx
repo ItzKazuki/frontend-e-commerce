@@ -1,39 +1,39 @@
-import { useState } from "react";
-import TextHeader from "../../components/TextHeader";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState } from 'react'
+import TextHeader from '../../components/TextHeader'
+import { useNavigate, useParams } from 'react-router-dom'
 import editAddress from '../../api/address/editAddress'
 
 export default function EditAddress() {
-  const navigate = useNavigate();
-  const { id } = useParams();
-  const user = JSON.parse(localStorage.getItem("user"));
-  const addressLS = user.addresses.find((address) => address.id === id);
-  const [loading, setLoading] = useState(false);
-  const [address, setAddress] = useState(addressLS);
+  const navigate = useNavigate()
+  const { id } = useParams()
+  const user = JSON.parse(localStorage.getItem('user'))
+  const addressLS = user.addresses.find((address) => address.id === id)
+  const [loading, setLoading] = useState(false)
+  const [address, setAddress] = useState(addressLS)
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target
     setAddress((prevAddress) => ({
       ...prevAddress,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    setLoading(true);
+    event.preventDefault()
+    setLoading(true)
     // Handle form submission logic here
     editAddress(id, address)
       .then((res) => {
-        setLoading(false);
-        localStorage.setItem("user", JSON.stringify(res.user));
-        return navigate("/account/address");
+        setLoading(false)
+        localStorage.setItem('user', JSON.stringify(res.user))
+        return navigate('/account/address')
       })
       .catch((err) => {
-        console.error(err);
-        setLoading(false);
-      });
-  };
+        console.error(err)
+        setLoading(false)
+      })
+  }
 
   return (
     <div className="flex flex-col justify-center items-center gap-4">
@@ -155,7 +155,7 @@ export default function EditAddress() {
                 {loading ? (
                   <span className="loading loading-spinner loading-md"></span>
                 ) : (
-                  "Update Address"
+                  'Update Address'
                 )}
               </button>
             </div>
@@ -163,5 +163,5 @@ export default function EditAddress() {
         </div>
       </div>
     </div>
-  );
+  )
 }

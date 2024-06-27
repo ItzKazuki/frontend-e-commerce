@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
-import getOrders from "../api/getOrders";
-import { Each } from "../components/Each";
-import TextHeader from "../components/TextHeader";
-import Loading from "../components/Loading";
-import OrderItem from "../components/OrderItem";
+import { useEffect, useState } from 'react'
+import getOrders from '../api/getOrders'
+import { Each } from '../components/Each'
+import TextHeader from '../components/TextHeader'
+import Loading from '../components/Loading'
+import OrderItem from '../components/OrderItem'
 
 export default function MyOrders() {
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [orders, setOrders] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getOrders().then((data) => {
-      setLoading(false);
-      setOrders(data.items);
-    });
-  }, [orders]);
+      setLoading(false)
+      setOrders(data.items)
+    })
+  }, [orders])
 
-  if (loading) return <Loading />;
+  if (loading) return <Loading />
 
   return (
     <div>
@@ -25,5 +25,5 @@ export default function MyOrders() {
         <Each of={orders} render={(item) => <OrderItem order={item} />} />
       </div>
     </div>
-  );
+  )
 }

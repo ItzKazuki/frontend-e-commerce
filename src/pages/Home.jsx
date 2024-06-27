@@ -1,33 +1,33 @@
-import getProducts from "../api/getProducts";
-import Product from "../components/Product";
-import { Each } from "../components/Each";
-import { useState, useEffect } from "react";
-import TextHeader from "../components/TextHeader";
-import Loading from "../components/Loading";
+import getProducts from '../api/getProducts'
+import Product from '../components/Product'
+import { Each } from '../components/Each'
+import { useState, useEffect } from 'react'
+import TextHeader from '../components/TextHeader'
+import Loading from '../components/Loading'
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     getProducts()
       .then((data) => {
-        setProducts(data.items);
-        setLoading(false);
+        setProducts(data.items)
+        setLoading(false)
       })
       .catch((error) => {
-        setError(error);
-        setLoading(false);
-      });
-  }, [products]);
+        setError(error)
+        setLoading(false)
+      })
+  }, [products])
 
   if (loading) {
-    return <Loading />;
+    return <Loading />
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div>Error: {error.message}</div>
   }
 
   return (
@@ -40,5 +40,5 @@ export default function Home() {
         />
       </div>
     </div>
-  );
+  )
 }

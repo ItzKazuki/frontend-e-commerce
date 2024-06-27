@@ -1,60 +1,60 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import getOrder from "../api/getOrder";
-import { Each } from "../components/Each";
-import Product from "../components/Product";
-import TextHeader from "../components/TextHeader";
-import { createAddressDetail, rupiah } from "../utils";
-import Loading from "../components/Loading";
-import NotFound from "./error/NotFound";
-import Card from "../components/Card";
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import getOrder from '../api/getOrder'
+import { Each } from '../components/Each'
+import Product from '../components/Product'
+import TextHeader from '../components/TextHeader'
+import { createAddressDetail, rupiah } from '../utils'
+import Loading from '../components/Loading'
+import NotFound from './error/NotFound'
+import Card from '../components/Card'
 
 export default function Order() {
-  const { id } = useParams();
-  const [order, setOrder] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const { id } = useParams()
+  const [order, setOrder] = useState({})
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   const image = order.order_items
     ? order?.order_items[0]?.product?.upload?.image
-    : "";
-  const order_items = order.order_items ? order?.order_items : [];
-  const payment = order.payment ? order.payment : [];
-  const address = order.address ? order.address : null;
+    : ''
+  const order_items = order.order_items ? order?.order_items : []
+  const payment = order.payment ? order.payment : []
+  const address = order.address ? order.address : null
 
   const PaymentStatus = () => {
-    let badgeColor = "primary";
-    if (payment.payment_status == "completed") badgeColor = "success";
-    if (payment.payment_status == "pending") badgeColor = "warning";
-    if (payment.payment_status == "cancelled") badgeColor = "info";
-    if (payment.payment_status == "failed") badgeColor = "danger";
+    let badgeColor = 'primary'
+    if (payment.payment_status == 'completed') badgeColor = 'success'
+    if (payment.payment_status == 'pending') badgeColor = 'warning'
+    if (payment.payment_status == 'cancelled') badgeColor = 'info'
+    if (payment.payment_status == 'failed') badgeColor = 'danger'
     return (
       <div className={`badge badge-${badgeColor}`}>
         {payment.payment_status}
       </div>
-    );
-  };
+    )
+  }
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(true)
     getOrder(id)
       .then((res) => {
-        setLoading(false);
-        setOrder(res.order);
+        setLoading(false)
+        setOrder(res.order)
       })
       .catch((err) => {
-        console.error(err);
-        setError(err);
-        setLoading(false);
-      });
-  }, [id]);
+        console.error(err)
+        setError(err)
+        setLoading(false)
+      })
+  }, [id])
 
   if (loading) {
-    return <Loading />;
+    return <Loading />
   }
 
   if (error) {
-    return <NotFound />;
+    return <NotFound />
   }
 
   return (
@@ -62,7 +62,7 @@ export default function Order() {
       <TextHeader>Details Order</TextHeader>
       <h2 className="text-sm font-bold ml-4">ID: {id}</h2>
       <div className="flex flex-wrap items-center justify-center gap-4 mt-6">
-        <Card className={`w-full`} title={"Shipping Address"}>
+        <Card className={`w-full`} title={'Shipping Address'}>
           {address != null ? (
             <>
               <h4 className="text-lg font-bold ml-2">
@@ -98,7 +98,7 @@ export default function Order() {
               Payment Status <PaymentStatus />
             </h2>
             <p>
-              {payment.payment_status == "completed"
+              {payment.payment_status == 'completed'
                 ? `Payment Success: ${new Date(
                     payment.updated_at
                   ).toLocaleDateString()}`
@@ -124,5 +124,5 @@ export default function Order() {
         </div>
       </div>
     </div>
-  );
+  )
 }

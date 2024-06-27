@@ -5,31 +5,27 @@ import {
   Link,
   useLocation,
   useNavigate,
-} from "react-router-dom";
-import { Home, MyOrders, Account } from "./pages";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHome,
-  faReceipt,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import NotFound from "./pages/error/NotFound";
-import Login from "./pages/auth/Login";
-import { cookie } from "./api/http";
-import Order from "./pages/Order";
-import Product from "./pages/Product";
-import { postLogout } from "./api/auth";
-import Cart from "./pages/Cart";
-import { useContext, useEffect, useState } from "react";
-import { CartContext } from "./context/CartContext";
-import Checkout from "./pages/Checkout";
-import Addresses from "./pages/address/Addresses";
-import CreateAddress from "./pages/address/CreateAddress";
-import ShowAddress from "./pages/address/ShowAddress";
-import EditAddress from "./pages/address/EditAddress";
-import Register from "./pages/auth/Register";
-import { rupiah } from "./utils";
-import EditAccount from "./pages/EditAccount";
+} from 'react-router-dom'
+import { Home, MyOrders, Account } from './pages'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome, faReceipt, faUser } from '@fortawesome/free-solid-svg-icons'
+import NotFound from './pages/error/NotFound'
+import Login from './pages/auth/Login'
+import { cookie } from './api/http'
+import Order from './pages/Order'
+import Product from './pages/Product'
+import { postLogout } from './api/auth'
+import Cart from './pages/Cart'
+import { useContext, useEffect, useState } from 'react'
+import { CartContext } from './context/CartContext'
+import Checkout from './pages/Checkout'
+import Addresses from './pages/address/Addresses'
+import CreateAddress from './pages/address/CreateAddress'
+import ShowAddress from './pages/address/ShowAddress'
+import EditAddress from './pages/address/EditAddress'
+import Register from './pages/auth/Register'
+import { rupiah } from './utils'
+import EditAccount from './pages/EditAccount'
 
 export default function App() {
   return (
@@ -136,33 +132,33 @@ export default function App() {
       <Route path="/register" element={<Register />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
-  );
+  )
 }
 
 function CheckAuth() {
-  const token = cookie.get("auth_token");
-  const navigate = useNavigate();
+  const token = cookie.get('auth_token')
+  const navigate = useNavigate()
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (!token || !user) return navigate("/login");
-  }, []);
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (!token || !user) return navigate('/login')
+  }, [])
 
-  return <Outlet />;
+  return <Outlet />
   // return (window.location.href = "/login");
 }
 
 function Layout({ children }) {
-  const [user, setUser] = useState({});
-  const token = cookie.get("auth_token");
+  const [user, setUser] = useState({})
+  const token = cookie.get('auth_token')
 
   // if(!user) return window.location.reload();
 
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("user")));
-  }, []);
+    setUser(JSON.parse(localStorage.getItem('user')))
+  }, [])
 
   if (!token) {
-    localStorage.removeItem("user");
+    localStorage.removeItem('user')
   }
 
   return (
@@ -171,49 +167,49 @@ function Layout({ children }) {
       <div className="my-4 mx-4 no-scrollbar">{children}</div>
       <BtmNavbar />
     </div>
-  );
+  )
 }
 
 function BtmNavbar() {
-  const { pathname } = useLocation();
-  const path = pathname.split("/")[1];
+  const { pathname } = useLocation()
+  const path = pathname.split('/')[1]
 
   return (
     <div className="btm-nav">
       <Link
         to="/"
         className={
-          pathname === "/" || path === "products" || path == "cart"
-            ? "active"
-            : ""
+          pathname === '/' || path === 'products' || path == 'cart'
+            ? 'active'
+            : ''
         }
       >
         <FontAwesomeIcon icon={faHome} />
       </Link>
-      <Link to={"/orders"} className={path === "orders" ? "active" : ""}>
+      <Link to={'/orders'} className={path === 'orders' ? 'active' : ''}>
         <FontAwesomeIcon icon={faReceipt} />
       </Link>
-      <Link to={"/account"} className={path === "account" ? "active" : ""}>
+      <Link to={'/account'} className={path === 'account' ? 'active' : ''}>
         <FontAwesomeIcon icon={faUser} />
       </Link>
     </div>
-  );
+  )
 }
 
 function Navbar({ user }) {
   const handleClickLogout = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     postLogout()
       .then(() => {
-        cookie.remove("auth_token");
-        localStorage.removeItem("cart");
-        localStorage.removeItem("user");
-        return (window.location.href = "/login");
+        cookie.remove('auth_token')
+        localStorage.removeItem('cart')
+        localStorage.removeItem('user')
+        return (window.location.href = '/login')
       })
-      .catch((err) => console.error(err));
-  };
+      .catch((err) => console.error(err))
+  }
 
-  const { getTotalPriceCart, cart } = useContext(CartContext);
+  const { getTotalPriceCart, cart } = useContext(CartContext)
 
   return (
     <div className="navbar bg-base-100">
@@ -251,9 +247,11 @@ function Navbar({ user }) {
           >
             <div className="card-body">
               <span className="font-bold text-lg">{cart.length} Items</span>
-              <span className="text-info">Subtotal: {rupiah(getTotalPriceCart())}</span>
+              <span className="text-info">
+                Subtotal: {rupiah(getTotalPriceCart())}
+              </span>
               <div className="card-actions">
-                <Link to={"/cart"} className="btn btn-primary btn-block">
+                <Link to={'/cart'} className="btn btn-primary btn-block">
                   View cart
                 </Link>
               </div>
@@ -299,5 +297,5 @@ function Navbar({ user }) {
         </div>
       </div>
     </div>
-  );
+  )
 }

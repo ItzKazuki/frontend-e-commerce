@@ -1,20 +1,20 @@
-import { Each } from "./Each";
-import { useEffect, useState } from "react";
-import getPaymentChannels from "../api/getPaymentChannels";
+import { Each } from './Each'
+import { useEffect, useState } from 'react'
+import getPaymentChannels from '../api/getPaymentChannels'
 
 export default function PaymentChannel({ onChange, nowSelect }) {
-  const [payments, setPayments] = useState([]);
+  const [payments, setPayments] = useState([])
 
   useEffect(() => {
-    getPaymentChannels().then((res) => setPayments(res.payments));
-  }, [setPayments]);
+    getPaymentChannels().then((res) => setPayments(res.payments))
+  }, [setPayments])
 
   const paymentIdentifier = {
-    cod: "COD (Cash On Delivery)",
-    qris: "QRIS",
-    gopay: "Gopay",
-    spay: "Shopee Pay",
-  };
+    cod: 'COD (Cash On Delivery)',
+    qris: 'QRIS',
+    gopay: 'Gopay',
+    spay: 'Shopee Pay',
+  }
 
   return (
     <>
@@ -40,5 +40,5 @@ export default function PaymentChannel({ onChange, nowSelect }) {
         <p className="font-bold">Payment Method Not Found.</p>
       )}
     </>
-  );
+  )
 }

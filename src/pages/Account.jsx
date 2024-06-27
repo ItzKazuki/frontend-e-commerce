@@ -1,15 +1,15 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TextHeader from "../components/TextHeader";
-import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-import { createAddressDetail } from "../utils";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import TextHeader from '../components/TextHeader'
+import { faAddressCard } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
+import { createAddressDetail } from '../utils'
 
 export default function Account() {
-  const account = localStorage.getItem("user");
-  const user = JSON.parse(account);
+  const account = localStorage.getItem('user')
+  const user = JSON.parse(account)
 
   // find address with is_primary true
-  const address = user.addresses.find((address) => address.is_primary);
+  const address = user.addresses.find((address) => address.is_primary)
 
   return (
     <div>
@@ -40,7 +40,9 @@ export default function Account() {
                 <p>Phone: {user.phone}</p>
               </div>
               <div className="card-actions justify-end mt-2">
-                <Link to={"edit"} className="btn btn-primary">Edit Account</Link>
+                <Link to={'edit'} className="btn btn-primary">
+                  Edit Account
+                </Link>
                 <button className="btn btn-error">Delete Account</button>
               </div>
             </div>
@@ -52,17 +54,17 @@ export default function Account() {
             {address ? (
               <address>{createAddressDetail(address)}</address>
             ) : (
-              <Link to={"address/create"} className="btn btn-primary">
+              <Link to={'address/create'} className="btn btn-primary">
                 <FontAwesomeIcon icon={faAddressCard} />
                 Create Address
               </Link>
             )}
-            <Link to={"address"} className="btn btn-link">
+            <Link to={'address'} className="btn btn-link">
               see more address...
             </Link>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,9 +1,9 @@
-import http, { cookie } from "./http";
+import http, { cookie } from './http'
 
-http.interceptors.request.use(config => {
-  config.headers.Authorization = `Bearer ${cookie.get("auth_token")}`;
-  return config;
-});
+http.interceptors.request.use((config) => {
+  config.headers.Authorization = `Bearer ${cookie.get('auth_token')}`
+  return config
+})
 
 export default () => {
   return new Promise((resolve, reject) => {
@@ -11,9 +11,9 @@ export default () => {
       .get(`/user`)
       .then(({ data }) => {
         resolve({
-          data: data.user
-        });
+          data: data.user,
+        })
       })
-      .catch(reject);
-  });
-};
+      .catch(reject)
+  })
+}

@@ -1,5 +1,5 @@
-import Home from "./Home";
-import Account from "./Account";
-import MyOrders from "./MyOrders";
+import Home from './Home'
+import Account from './Account'
+import MyOrders from './MyOrders'
 
-export { Home, Account, MyOrders };
+export { Home, Account, MyOrders }

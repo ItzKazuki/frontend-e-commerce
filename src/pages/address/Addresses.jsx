@@ -1,23 +1,23 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TextHeader from "../../components/TextHeader";
-import { faAdd } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import getAddress from "../../api/address/getAddress";
-import { Each } from "../../components/Each";
-import Loading from "../../components/Loading";
-import { createAddressDetail } from "../../utils";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import TextHeader from '../../components/TextHeader'
+import { faAdd } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import getAddress from '../../api/address/getAddress'
+import { Each } from '../../components/Each'
+import Loading from '../../components/Loading'
+import { createAddressDetail } from '../../utils'
 
 export default function Addresses() {
-  const [address, setAddress] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [address, setAddress] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getAddress().then((data) => {
-      setLoading(false);
-      setAddress(data.address);
-    });
-  }, [setAddress]);
+      setLoading(false)
+      setAddress(data.address)
+    })
+  }, [setAddress])
 
   return (
     <>
@@ -37,11 +37,11 @@ export default function Addresses() {
                 >
                   <div className="card-body">
                     <h5 className="card-title">
-                      {item.address_title}{" "}
+                      {item.address_title}{' '}
                       {item.is_primary ? (
                         <div className="badge badge-primary">in use</div>
                       ) : (
-                        ""
+                        ''
                       )}
                     </h5>
                     <p>{createAddressDetail(item)}</p>
@@ -63,5 +63,5 @@ export default function Addresses() {
         </div>
       )}
     </>
-  );
+  )
 }

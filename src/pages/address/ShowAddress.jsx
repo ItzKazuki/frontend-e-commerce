@@ -1,33 +1,33 @@
-import { Link, useParams } from "react-router-dom";
-import TextHeader from "../../components/TextHeader";
-import { createAddressDetail } from "../../utils";
-import { useState } from "react";
-import deleteAddress from "../../api/address/deleteAddress";
-import setPrimaryAddress from "../../api/address/setPrimaryAddress";
+import { Link, useParams } from 'react-router-dom'
+import TextHeader from '../../components/TextHeader'
+import { createAddressDetail } from '../../utils'
+import { useState } from 'react'
+import deleteAddress from '../../api/address/deleteAddress'
+import setPrimaryAddress from '../../api/address/setPrimaryAddress'
 
 export default function ShowAddress() {
-  const { id } = useParams();
-  const user = JSON.parse(localStorage.getItem("user"));
-  const address = user.addresses.find((address) => address.id === id);
-  const [showModal, setShowModal] = useState(false);
-  const [loadingSetPrimary, setLoadingSetPrimary] = useState(false);
-  const [deleteLoading, setDeleteLoading] = useState(false);
+  const { id } = useParams()
+  const user = JSON.parse(localStorage.getItem('user'))
+  const address = user.addresses.find((address) => address.id === id)
+  const [showModal, setShowModal] = useState(false)
+  const [loadingSetPrimary, setLoadingSetPrimary] = useState(false)
+  const [deleteLoading, setDeleteLoading] = useState(false)
 
   const handleDelete = () => {
-    setDeleteLoading(true);
+    setDeleteLoading(true)
     deleteAddress(id).then((res) => {
-      localStorage.setItem("user", JSON.stringify(res.user));
-      return window.location.href = "/account";
-    });
-  };
+      localStorage.setItem('user', JSON.stringify(res.user))
+      return (window.location.href = '/account')
+    })
+  }
 
   const handleSetPrimary = () => {
-    setLoadingSetPrimary(true);
+    setLoadingSetPrimary(true)
     setPrimaryAddress(id).then((res) => {
-      localStorage.setItem("user", JSON.stringify(res.user));
-      return window.location.reload();
-    });
-  };
+      localStorage.setItem('user', JSON.stringify(res.user))
+      return window.location.reload()
+    })
+  }
 
   return (
     <div>
@@ -37,11 +37,11 @@ export default function ShowAddress() {
         <div className="card w-full bg-base-200 shadow-xl">
           <div className="card-body">
             <h5 className="card-title text-lg">
-              {address.address_title}{" "}
+              {address.address_title}{' '}
               {address.is_primary ? (
                 <div className="badge badge-primary">primary</div>
               ) : (
-                ""
+                ''
               )}
             </h5>
             <p>{createAddressDetail(address)}</p>
@@ -53,7 +53,7 @@ export default function ShowAddress() {
                 {loadingSetPrimary ? (
                   <span className="loading loading-spinner loading-md"></span>
                 ) : (
-                  "Set Primary"
+                  'Set Primary'
                 )}
               </button>
             )}
@@ -65,11 +65,11 @@ export default function ShowAddress() {
               Address Detail
             </h5>
             <p>
-              <span className="text-lg font-bold">Address 1:</span>{" "}
+              <span className="text-lg font-bold">Address 1:</span>{' '}
               {address.address_line1}
             </p>
             <p>
-              <span className="text-lg font-bold">Address 2:</span>{" "}
+              <span className="text-lg font-bold">Address 2:</span>{' '}
               {address.address_line2}
             </p>
             <p>
@@ -79,11 +79,11 @@ export default function ShowAddress() {
               <span className="text-lg font-bold">State:</span> {address.state}
             </p>
             <p>
-              <span className="text-lg font-bold">Postal Code:</span>{" "}
+              <span className="text-lg font-bold">Postal Code:</span>{' '}
               {address.postal_code}
             </p>
             <p>
-              <span className="text-lg font-bold">Country:</span>{" "}
+              <span className="text-lg font-bold">Country:</span>{' '}
               {address.country}
             </p>
             <div className="card-actions justify-end">
@@ -119,12 +119,14 @@ export default function ShowAddress() {
               <button className="btn btn-error" onClick={handleDelete}>
                 {deleteLoading ? (
                   <span className="loading loading-spinner loading-md"></span>
-                ) : "Yes, Delete"}
+                ) : (
+                  'Yes, Delete'
+                )}
               </button>
             </div>
           </div>
         </div>
       )}
     </div>
-  );
+  )
 }
