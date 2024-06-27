@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import getOrders from '../../api/order/getOrders'
-import { Each } from '../../components/Each'
-import TextHeader from '../../components/TextHeader'
-import Loading from '../../components/Loading'
-import OrderItem from '../../components/OrderItem'
+import getOrders from '@api/order/getOrders'
+import { Each } from '@components/Each'
+import TextHeader from '@components/TextHeader'
+import Loading from '@components/Loading'
+import OrderItem from '@components/OrderItem'
 
 export default function MyOrders() {
   const [orders, setOrders] = useState([])

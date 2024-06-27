@@ -1,4 +1,4 @@
-import http from '../http'
+import http from '@api/http'
 
 export default (id) => {
   return new Promise((resolve, reject) => {

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import TextHeader from '../../components/TextHeader'
+import TextHeader from '@components/TextHeader'
 import { faAddressCard } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import { createAddressDetail } from '../../utils'

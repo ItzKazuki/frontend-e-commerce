@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react'
-import TextHeader from '../components/TextHeader'
+import TextHeader from '@components/TextHeader'
 import { CartContext } from '../context/CartContext'
 import { createAddressDetail, rupiah } from '../utils'
-import { Each } from '../components/Each'
+import { Each } from '@components/Each'
 import { useNavigate } from 'react-router-dom'
-import createOrder from '../api/order/createOrder'
-import PaymentChannel from '../components/PaymentChannel'
+import createOrder from '@api/order/createOrder'
+import PaymentChannel from '@components/PaymentChannel'
 
 export default function Checkout() {
   const user = JSON.parse(localStorage.getItem('user'))

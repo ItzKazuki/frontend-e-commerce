@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import Card from '../../components/Card'
-import TextHeader from '../../components/TextHeader'
-import updateAccount from '../../api/account/updateAccount'
+import Card from '@components/Card'
+import TextHeader from '@components/TextHeader'
+import updateAccount from '@api/account/updateAccount'
 import { useNavigate } from 'react-router-dom'
 
 export default function EditAccount() {

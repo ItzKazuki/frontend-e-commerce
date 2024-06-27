@@ -1,6 +1,6 @@
 import { Each } from './Each'
 import { useEffect, useState } from 'react'
-import getPaymentChannels from '../api/getPaymentChannels'
+import getPaymentChannels from '@api/getPaymentChannels'
 
 export default function PaymentChannel({ onChange, nowSelect }) {
   const [payments, setPayments] = useState([])

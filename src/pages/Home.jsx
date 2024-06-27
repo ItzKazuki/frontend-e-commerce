@@ -1,9 +1,9 @@
-import getProducts from '../api/product/getProducts'
-import Product from '../components/Product'
-import { Each } from '../components/Each'
+import getProducts from '@api/product/getProducts'
+import Product from '@components/Product'
+import { Each } from '@components/Each'
 import { useState, useEffect } from 'react'
-import TextHeader from '../components/TextHeader'
-import Loading from '../components/Loading'
+import TextHeader from '@components/TextHeader'
+import Loading from '@components/Loading'
 
 export default function Home() {
   const [products, setProducts] = useState([])

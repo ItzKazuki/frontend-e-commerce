@@ -1,10 +1,10 @@
 import { useEffect, useState, useContext } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import getProduct from '../api/product/getProduct'
+import getProduct from '@api/product/getProduct'
 import { CartContext } from '../context/CartContext'
-import TextHeader from '../components/TextHeader'
+import TextHeader from '@components/TextHeader'
 import { rupiah } from '../utils'
-import Loading from '../components/Loading'
+import Loading from '@components/Loading'
 
 export default function Product() {
   const { id } = useParams()

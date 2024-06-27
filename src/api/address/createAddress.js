@@ -1,4 +1,4 @@
-import http, { cookie } from '../http'
+import http, { cookie } from '@api/http'
 
 http.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${cookie.get('auth_token')}`

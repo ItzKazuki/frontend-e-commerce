@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import TextHeader from '../../components/TextHeader'
+import TextHeader from '@components/TextHeader'
 import { faAdd } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import getAddress from '../../api/address/getAddress'
-import { Each } from '../../components/Each'
-import Loading from '../../components/Loading'
+import getAddress from '@api/address/getAddress'
+import { Each } from '@components/Each'
+import Loading from '@components/Loading'
 import { createAddressDetail } from '../../utils'
 
 export default function Addresses() {

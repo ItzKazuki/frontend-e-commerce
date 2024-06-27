@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { postRegister } from '../../api/auth'
+import { postRegister } from '@api/auth'
 import { Link, useNavigate } from 'react-router-dom'
 
 const RegisterForm = () => {
