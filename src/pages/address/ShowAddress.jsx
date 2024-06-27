@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import TextHeader from "../../components/TextHeader";
 import { createAddressDetail } from "../../utils";
 import { useState } from "react";
@@ -7,20 +7,22 @@ import setPrimaryAddress from "../../api/address/setPrimaryAddress";
 
 export default function ShowAddress() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
   const address = user.addresses.find((address) => address.id === id);
   const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loadingSetPrimary, setLoadingSetPrimary] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const handleDelete = () => {
-    deleteAddress(id).then(() => {
-      return navigate("/account/address");
+    setDeleteLoading(true);
+    deleteAddress(id).then((res) => {
+      localStorage.setItem("user", JSON.stringify(res.user));
+      return window.location.href = "/account";
     });
   };
 
   const handleSetPrimary = () => {
-    setLoading(true);
+    setLoadingSetPrimary(true);
     setPrimaryAddress(id).then((res) => {
       localStorage.setItem("user", JSON.stringify(res.user));
       return window.location.reload();
@@ -42,13 +44,13 @@ export default function ShowAddress() {
                 ""
               )}
             </h5>
-            <p>{createAddressDetail(address, user)}</p>
+            <p>{createAddressDetail(address)}</p>
             {!address.is_primary && (
               <button
                 className="btn btn-primary w-full"
                 onClick={handleSetPrimary}
               >
-                {loading ? (
+                {loadingSetPrimary ? (
                   <span className="loading loading-spinner loading-md"></span>
                 ) : (
                   "Set Primary"
@@ -115,7 +117,9 @@ export default function ShowAddress() {
                 Cancel
               </button>
               <button className="btn btn-error" onClick={handleDelete}>
-                Yes, Delete
+                {deleteLoading ? (
+                  <span className="loading loading-spinner loading-md"></span>
+                ) : "Yes, Delete"}
               </button>
             </div>
           </div>

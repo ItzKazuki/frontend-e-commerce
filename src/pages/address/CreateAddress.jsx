@@ -8,6 +8,7 @@ export default function CreateAddress() {
   const [loading, setLoading] = useState(false);
   const [address, setAddress] = useState({
     address_title: "",
+    address_name: "",
     address_line1: "",
     address_line2: "",
     city: "",
@@ -48,7 +49,7 @@ export default function CreateAddress() {
           <form onSubmit={handleSubmit}>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Address Name</span>
+                <span className="label-text">Address Title</span>
               </label>
               <input
                 type="text"
@@ -56,6 +57,20 @@ export default function CreateAddress() {
                 name="address_title"
                 className="input input-bordered"
                 value={address.address_title}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Address Name</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Home"
+                name="address_name"
+                className="input input-bordered"
+                value={address.address_name}
                 onChange={handleChange}
                 required
               />

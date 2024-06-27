@@ -20,8 +20,7 @@ export default function Order() {
     : "";
   const order_items = order.order_items ? order?.order_items : [];
   const payment = order.payment ? order.payment : [];
-  const address = order.address ? order.address : [];
-  const user = order.user ? order.user : [];
+  const address = order.address ? order.address : null;
 
   const PaymentStatus = () => {
     let badgeColor = "primary";
@@ -64,10 +63,16 @@ export default function Order() {
       <h2 className="text-sm font-bold ml-4">ID: {id}</h2>
       <div className="flex flex-wrap items-center justify-center gap-4 mt-6">
         <Card className={`w-full`} title={"Shipping Address"}>
-          <h4 className="text-lg font-bold ml-2">{address.address_title}</h4>
-          <address className="ml-2">
-            {createAddressDetail(address, user)}
-          </address>
+          {address != null ? (
+            <>
+              <h4 className="text-lg font-bold ml-2">
+                {address.address_title}
+              </h4>
+              <address className="ml-2">{createAddressDetail(address)}</address>
+            </>
+          ) : (
+            <p>Address not found or already deleted</p>
+          )}
         </Card>
         <div className="card w-full lg:card-side bg-base-200 shadow-xl">
           <figure>

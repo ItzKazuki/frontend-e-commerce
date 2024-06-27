@@ -51,7 +51,7 @@ export default function Checkout() {
             <div className="card w-full bg-neutral text-neutral-content">
               <div className="card-body">
                 <h2 className="text-2xl font-bold">Shipping Address</h2>
-                <p>{createAddressDetail(address, user)}</p>
+                <p>{createAddressDetail(address)}</p>
               </div>
             </div>
             <div className="card w-full bg-neutral text-neutral-content">

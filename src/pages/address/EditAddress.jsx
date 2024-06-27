@@ -43,7 +43,7 @@ export default function EditAddress() {
           <form onSubmit={handleSubmit}>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Address Name</span>
+                <span className="label-text">Address Title</span>
               </label>
               <input
                 type="text"
@@ -51,6 +51,20 @@ export default function EditAddress() {
                 name="address_title"
                 className="input input-bordered"
                 value={address.address_title}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Address Name</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Home"
+                name="address_name"
+                className="input input-bordered"
+                value={address.address_name}
                 onChange={handleChange}
                 required
               />

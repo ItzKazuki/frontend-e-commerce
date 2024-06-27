@@ -6,8 +6,8 @@ export const rupiah = (number) =>
     maximumFractionDigits: 0,
   }).format(number);
 
-export const createAddressDetail = (addr, user) =>
-  user.name +
+export const createAddressDetail = (addr) =>
+  addr.address_name +
   ", " +
   addr.address_line1 +
   ", " +

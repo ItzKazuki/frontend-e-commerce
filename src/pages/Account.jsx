@@ -50,7 +50,7 @@ export default function Account() {
           <div className="card-body">
             <h2 className="card-title">Address</h2>
             {address ? (
-              <address>{createAddressDetail(address, user)}</address>
+              <address>{createAddressDetail(address)}</address>
             ) : (
               <Link to={"address/create"} className="btn btn-primary">
                 <FontAwesomeIcon icon={faAddressCard} />

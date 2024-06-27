@@ -12,8 +12,6 @@ export default function Addresses() {
   const [address, setAddress] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const user = JSON.parse(localStorage.getItem("user"));
-
   useEffect(() => {
     getAddress().then((data) => {
       setLoading(false);
@@ -46,7 +44,7 @@ export default function Addresses() {
                         ""
                       )}
                     </h5>
-                    <p>{createAddressDetail(item, user)}</p>
+                    <p>{createAddressDetail(item)}</p>
                   </div>
                 </Link>
               )}
